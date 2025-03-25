@@ -250,4 +250,10 @@ export class PaymentsService {
       stripeStatus.toUpperCase() as keyof typeof SubscriptionStatus;
     return SubscriptionStatus[statusKey] || SubscriptionStatus.UNEXPECTED;
   }
+
+  async handlePaymentIntent(object: Stripe.PaymentIntent) {
+    const charges = await this.stripeService.getCharges(object);
+    const charge = charges.data[0];
+    console.log(charge);
+  }
 }

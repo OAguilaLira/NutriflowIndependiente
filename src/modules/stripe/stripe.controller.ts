@@ -39,7 +39,7 @@ export class StripeController {
         break;
       }
       case 'payment_intent.succeeded': {
-        console.log(event.data.object);
+        await this.paymentService.handlePaymentIntent(event.data.object);
       }
       default: {
         console.log(`Evento del tipo ${event.type}, no manejado`);

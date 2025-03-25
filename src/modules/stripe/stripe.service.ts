@@ -82,4 +82,12 @@ export class StripeService {
       throw error;
     }
   }
+
+  async getCharges(object: Stripe.PaymentIntent) {
+    const charges = await this.stripe.charges.list({
+      payment_intent: object.id,
+      limit: 1,
+    });
+    return charges;
+  }
 }
